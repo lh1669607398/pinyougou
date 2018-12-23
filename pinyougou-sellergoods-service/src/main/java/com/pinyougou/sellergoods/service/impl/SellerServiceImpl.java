@@ -1,4 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
+import java.util.Date;
 import java.util.List;
 
 import com.pinyougou.entity.PageResult;
@@ -41,16 +42,6 @@ public class SellerServiceImpl implements SellerService {
 		Page<TbSeller> page=   (Page<TbSeller>) sellerMapper.selectByExample(null);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-
-	/**
-	 * 增加
-	 */
-	@Override
-	public void add(TbSeller seller) {
-		sellerMapper.insert(seller);		
-	}
-
-	
 	/**
 	 * 修改
 	 */
@@ -160,5 +151,13 @@ public class SellerServiceImpl implements SellerService {
 		Page<TbSeller> page= (Page<TbSeller>)sellerMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+	/**
+	 * 增加商家
+	 */
+	@Override
+	public void add(TbSeller seller) {
+		seller.setStatus("0");  //设置未审核的商家状态
+		seller.setCreateTime(new Date()); //设置创建事件
+		sellerMapper.insert(seller);
+	}
 }
