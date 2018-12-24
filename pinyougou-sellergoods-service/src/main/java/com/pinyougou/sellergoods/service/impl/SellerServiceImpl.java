@@ -160,4 +160,16 @@ public class SellerServiceImpl implements SellerService {
 		seller.setCreateTime(new Date()); //设置创建事件
 		sellerMapper.insert(seller);
 	}
+	/**
+	 * 更改状态
+	 * @param sellerId
+	 * @param status
+	 */
+	@Override
+	public void updateStatus(String sellerId, String status) {
+		TbSeller seller = sellerMapper.selectByPrimaryKey(sellerId);
+		seller.setStatus(status);
+		sellerMapper.updateByPrimaryKey(seller);
+
+	}
 }
