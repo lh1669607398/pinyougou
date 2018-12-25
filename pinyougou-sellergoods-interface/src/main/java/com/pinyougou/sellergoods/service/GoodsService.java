@@ -26,20 +26,7 @@ public interface GoodsService {
 	 */
 	public PageResult findPage(int pageNum, int pageSize);
 
-	/**
-	 * 修改
-	 */
-	public void update(TbGoods goods);
-	
 
-	/**
-	 * 根据ID获取实体
-	 * @param id
-	 * @return
-	 */
-	public TbGoods findOne(Long id);
-	
-	
 	/**
 	 * 批量删除
 	 * @param ids
@@ -58,5 +45,25 @@ public interface GoodsService {
 	 * 增加
 	 */
 	public void add(Goods goods);
-	
+
+	/**
+	 * 根据ID获取实体
+	 * @param id
+	 * @return
+	 */
+	public Goods   findOne(Long id);
+	/**
+	 * 修改
+	 */
+	public void update(Goods goods);
+	/**
+	 * 批量修改状态
+	 * @param ids
+	 * @param status
+	 */
+	public void updateStatus(Long []ids,String status);
+
+
+
+
 }
