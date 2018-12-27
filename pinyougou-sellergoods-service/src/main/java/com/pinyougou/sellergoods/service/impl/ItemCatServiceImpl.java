@@ -11,6 +11,7 @@ import com.pinyougou.pojo.TbItemCat;
 import com.pinyougou.pojo.TbItemCatExample;
 import com.pinyougou.pojo.TbItemCatExample.Criteria;
 import com.pinyougou.sellergoods.service.ItemCatService;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -101,8 +102,10 @@ public class ItemCatServiceImpl implements ItemCatService {
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 	/**
-	 * 根据上级id1查询列表
+	 * 根据上级id查询列表
 	 * @param parentId
 	 * @return
 	 */
@@ -110,8 +113,17 @@ public class ItemCatServiceImpl implements ItemCatService {
     public List<TbItemCat> findByParentId(Long parentId) {
 		TbItemCatExample example1=new TbItemCatExample();
 		Criteria criteria1 = example1.createCriteria();
+		//设置条件
 		criteria1.andParentIdEqualTo(parentId);
-		return  itemCatMapper.selectByExample(example1);
+		//将模板id放入缓存
+        List<TbItemCat> tbItemCatList = findAll();
+        //遍历商品分类
+        for (TbItemCat tbItemCat : tbItemCatList) {
+            //将商品分类名称作为key 模板id作为value存入缓存
+            redisTemplate.boundHashOps("tbItemCat").put(tbItemCat.getName(),tbItemCat.getTypeId());
+        }
+		System.out.println("缓存了模板id");
+        return  itemCatMapper.selectByExample(example1);
 
 	}
 
