@@ -26,6 +26,7 @@
         <module>pinyougou-page-interface</module>
         <module>pinyougou-page-service</module>
         <module>pinyougou-page-web</module>
+        <module>itcast_sms</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

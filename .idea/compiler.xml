@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="itcast_sms" />
         <module name="pinyougou-common" />
         <module name="pinyougou-content-interface" />
         <module name="pinyougou-content-service" />

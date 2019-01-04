@@ -228,7 +228,7 @@ public class ItemSearchServiceimpl implements ItemSearchService {
      */
     @Override
     public void importItem(List list) {
-        solrTemplate.saveBean(list);
+        solrTemplate.saveBeans(list);
         solrTemplate.commit();
     }
 
