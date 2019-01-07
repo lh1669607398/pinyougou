@@ -14,7 +14,7 @@ public class TopicMessageListener implements MessageListener {
     @Autowired
     private ItemPageService itemPageService;
     @Override
-    public void onMessage(Message message) {
+    public  void onMessage(Message message) {
         ObjectMessage objectMessage= (ObjectMessage) message;
         try {
             String text = (String) objectMessage.getObject();
@@ -25,4 +25,5 @@ public class TopicMessageListener implements MessageListener {
             e.printStackTrace();
         }
     }
+
 }
